@@ -15,6 +15,8 @@ ls
 
 bash install.sh
 
+pasword : takoyaki
+
 selamat mencoba
 
 jika ada kendala hubungi hiyakifuji@gmail.com
