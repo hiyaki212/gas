@@ -1,0 +1,151 @@
+#!/data/data/com.termux/files/usr/bin/bash
+# mau ngapain 
+# tukang rekod
+# belajar sana aku jugak belajar dari nol
+#syuh syuh pergi sana
+
+
+# Warna dasar saja
+R='\033[0;31m'  # Merah
+G='\033[0;32m'  # Hijau
+Y='\033[0;33m'  # Kuning
+B='\033[0;34m'  # Biru
+N='\033[0m'     # Reset
+
+        echo -e "${B} hai selamat datang di shell ${N}"
+sleep 0.5
+        printf "%b" "${G} berikan password:${N}"
+read input_password
+        echo ""
+#tampilan loading
+    warna_loading() {
+        local cols=$(tput cols)
+        local rows=$(tput lines)
+        local msg="TUNGGU BENTAR....."
+        local length=${#msg}
+
+        tput clear
+        for ((i=1; i<=10; i++)); do
+    tput cup $((rows/2)) $(((cols/2)-(length/2)))
+    echo -ne "\e[3${i}m${msg}\e[0m"
+    sleep 0.1
+done
+tput cup $((rows/2 + 1)) $(((cols/2)-(length/2)))
+        echo "selesai"
+        tput cvvis
+}
+
+warna_loading
+
+run_seeker() {
+
+if [ -f "modul" ]; then
+        echo " ${B}menjalankan seeker${N}"
+        cd module && python3 seeker.sh
+break
+ else
+        echo -e " ${R}cobak ketik bash install.sh${N}"
+fi
+}
+#paswod
+clear
+if [ "$input_password" != "takoyaki" ]; then
+        echo -e "${B} kamu bukan admin${N}"
+        exit 1
+fi
+# menu utama
+clear
+        echo -e "${G} hai hiyaki selamat datang di program saya${N}"
+sleep 0.2
+        echo -e "${R}____________________________________________${N}"
+sleep 0.2
+        echo -e "${G}[1]jalankan ngrok${N}"
+sleep 0.2
+        echo -e "${R}____________________________________________${N}"
+sleep 0.2
+        echo -e "${G}[2]jalankan seeker${N}"
+sleep 0.2
+        echo -e "${R}____________________________________________${N}"
+sleep 0.2
+        echo -e "${G}[3]keluar${N}"
+        echo -e "${R}____________________________________________${N}"
+        printf "%b" "${B}pilih:${N}"
+read pilih
+
+
+        case $pilih in
+        1)
+    echo -e "${Y}Memulai Ngrok...${N}"
+    sleep 1
+
+    # Fungsi cek ngrok
+    check_ngrok() {
+        if ! command -v ngrok &>/dev/null; then
+            echo -e "${R}[!] Error, install ngrok dulu bang! ${N}"
+            return 1
+        fi
+        return 0
+    }
+
+    # Jalankan cek
+    if ! check_ngrok; then
+        echo -e "${R}cobak ketik bash install.sh${N}"
+        sleep 2
+exit 1
+        continue  # Kembali ke menu
+    fi
+
+    # Lanjut jika ngrok terdeteksi
+    while true; do
+        printf "%b" "${B}Masukkan port:${N}"
+        read port
+
+        if ! [[ $port =~ ^[0-9]+$ ]]; then
+            echo -e "${R}Error: Port harus angka kocak!${N}"
+            continue
+        fi
+
+        printf "%b" "${Y}Gunakan port $port? (y/n):${N}"
+        read lanjut
+
+        case $lanjut in
+            [yY])
+                echo -e "${G}Memulai Ngrok di port $port...${N}"
+     # Animasi loading
+                for i in {1..10}; do
+                    echo -ne "${G}▶${N}"
+                    sleep 0.1
+                done
+                echo ""
+
+                ngrok http "$port"
+                break
+                ;;
+            [nN])
+                echo -e "${B}Dibatalkan${N}"
+                break
+                ;;
+            *)
+                echo -e "${R}tinggal milih ${G}y ${N} atau ${G}n ${N}apa susahnya?"
+                ;;
+        esac
+    done
+            ;;
+        2)
+        echo -e "${B}memulai seeker......${N}"
+sleep 1
+           run_seeker "parameter1"
+            ;;
+        3)
+        echo -e "${G}makasih udah mampir${N}"
+sleep 1
+        exit 1
+            ;;
+        *)
+            echo -e "${R}apaalah pilih aja apa yang ada${N}"
+            ;;
+    esac
+# mak udah sampe sini aja antum
+# dahlah ngak pa pa
+# jagan kopas tapi ya pelajari aja sengaja ngak pakek sc shc 
+# repot ke 089643213958 klo ada kendala ya
