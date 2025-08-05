@@ -15,6 +15,8 @@ ls
 
 bash install.sh
 
+./gaskan
+
 pasword : takoyaki
 
 selamat mencoba
