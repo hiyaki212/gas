@@ -41,7 +41,8 @@ run_seeker() {
 
 if [ -f "modul" ]; then
         echo " ${B}menjalankan seeker${N}"
-        cd module && python3 seeker.sh
+        cd module
+        python3 seeker.sh
 break
  else
         echo -e " ${R}cobak ketik bash install.sh${N}"
