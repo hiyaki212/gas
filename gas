@@ -38,15 +38,23 @@ tput cup $((rows/2 + 1)) $(((cols/2)-(length/2)))
 warna_loading
 
 run_seeker() {
+    echo -e "${G}[*] masuk ke modul...${N}"
 
-if [ -f "modul" ]; then
-        echo " ${B}menjalankan seeker${N}"
-        cd module
-        python3 seeker.sh
-break
- else
-        echo -e " ${R}cobak ketik bash install.sh${N}"
-fi
+    if cd modul 2>/dev/null; then
+        echo -e "${G}[+] Berhasil masuk ke direktori modul${N}"
+
+        if [ -f "seeker.py" ]; then
+            echo -e "${G}[+] Menjalankan install.sh...${N}"
+            python3 seeker.py
+            return $?
+        else
+            echo -e "${R}[-] File seeker.py tidak ditemukan${N}"
+            return 1
+        fi
+    else
+        echo -e "${R}[-] Gagal masuk ke direktori modul${N}"
+        return 1
+    fi
 }
 #paswod
 clear
